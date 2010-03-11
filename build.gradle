@@ -30,8 +30,10 @@ subprojects {
 			"com.google.inject:guice:2.0",
 			"org.ops4j:peaberry:1.1.1",
 			"aopalliance:aopalliance:1.0",
-			"org.osgi:org.osgi.core:4.2.0",		
+			"org.osgi:org.osgi.core:4.2.0",	
+			":org.apache.felix.log:1.0.0@jar"	
 		)
+		runtime ":peaberry.activation:1.2-SNAPSHOT@jar"
 	}
 }
 

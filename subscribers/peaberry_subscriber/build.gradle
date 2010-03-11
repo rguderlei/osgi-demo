@@ -1,0 +1,10 @@
+dependsOn(':model')
+
+dependencies {
+	compile project(':model')
+}
+
+configure(jar.osgi) {
+  instruction 'Import-Package', '*'
+  instruction 'Bundle-Activator', 'de.guderlei.pubsub.subscriber.Module'
+}
