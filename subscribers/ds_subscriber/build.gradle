@@ -1,0 +1,14 @@
+dependsOn(':model')
+
+configure(jar.osgi) {
+  instruction 'Import-Package', '*'
+  instruction 'Bundle-Activator', 'de.guderlei.pubsub.subscriber.conf.Activator' 
+  //instruction 'Bundle-Module', 'de.guderlei.pubsub.subscriber.conf.SubModule'
+  //instruction 'Service-Component', 'OSGI-INF/simpleSubscriber.xml'
+  //instruction 'Export-Package', 'de.guderlei.pubsub.subscriber.*'	   
+}
+
+
+dependencies {
+	compile project(':model')
+}

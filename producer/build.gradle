@@ -1,0 +1,12 @@
+dependsOn(':model')
+
+configure(jar.osgi) {
+  version = '0.0.1'
+  instruction 'Import-Package', '*'
+  instruction 'Bundle-Activator', 'de.guderlei.pubsub.producer.Activator'
+  instruction 'Export-Package', 'de.guderlei.pubsub.producer.*'
+}
+
+dependencies {
+	compile project(':model'), "org.apache.felix:org.apache.felix.http.bundle:2.0.4@jar"
+}

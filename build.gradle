@@ -1,0 +1,66 @@
+dependsOnChildren()
+usePlugin 'base'
+
+allprojects{
+	group = 'pubsub'
+    	version = '0.0.1'
+
+	repositories {
+		flatDir name: 'localRepository', dirs: 'lib'							
+	}
+}
+
+subprojects {
+	usePlugin 'java'
+	usePlugin 'osgi'
+	usePlugin 'eclipse' 
+
+	group = 'pubsub'
+    	version = '0.0.1'
+
+	sourceCompatibility = '1.6' 
+	targetCompatibility = '1.6' 
+
+	dependencies {
+		testCompile 'junit:junit:4.8.1',":mockito-all:1.8.2@jar"
+		
+		compile (
+			//JSR-305 API / Annotations for defect detection
+			"com.google.code.findbugs:jsr305:1.3.9",
+			"com.google.inject:guice:2.0",
+			"org.ops4j:peaberry:1.1.1",
+			"aopalliance:aopalliance:1.0",
+			"org.osgi:org.osgi.core:4.2.0",		
+		)
+	}
+}
+
+configurations{
+	runtime
+}
+
+dependencies {
+	runtime project(':model')
+	runtime project(':message-hub')
+	runtime project(':subscribers:ds_subscriber')
+	runtime project(':subscribers:peaberry_subscriber')
+	runtime project(':producer')
+}
+
+task distLibs(type: Copy, dependsOn: configurations.runtime) {
+    into file("$buildDir/distLibs")
+    from configurations.runtime
+}
+
+
+task dist(dependsOn:'distLibs', type:Zip ) {
+	//println 'creating deployment artifact'
+	zipFileSet(dir: "$buildDir/distLibs") 
+        zipFileSet(dir: "src/dist")
+	excludes:"org.osgi.*"
+	customName: "pubsub-${version}.zip"
+}
+
+task run(dependsOn:'dist') << {
+	println 'running project on OSGi'
+}

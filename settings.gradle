@@ -1,0 +1,5 @@
+include "message-hub"
+include "producer"
+include "subscribers:ds_subscriber"
+include "subscribers:peaberry_subscriber"
+include "model"
