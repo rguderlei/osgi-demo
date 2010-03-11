@@ -16,6 +16,6 @@ public class PeaberrySubscriberTest {
 		PeaberrySubscriber sub = new PeaberrySubscriber(log);
 		
 		sub.receive(message);
-		verify(log, only()).log(LogService.LOG_INFO, "PeaberrySubscriber: me: message");
+		verify(log, only()).log(LogService.LOG_INFO, "PeaberrySubscriber: " + message.toString());
 	}
 }

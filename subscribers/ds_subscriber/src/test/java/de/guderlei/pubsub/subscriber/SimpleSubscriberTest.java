@@ -19,6 +19,6 @@ public class SimpleSubscriberTest {
 		sub.setLog(log);
 		
 		sub.receive(message);
-		verify(log, only()).log(LogService.LOG_INFO, "SCR Subscriber: me: message");
+		verify(log, only()).log(LogService.LOG_INFO, "SCR Subscriber: " + message.toString());
 	}
 }
