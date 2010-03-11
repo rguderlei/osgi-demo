@@ -26,10 +26,8 @@ public class Activator implements BundleActivator {
 	    Hashtable<String, String> props = new Hashtable<String, String>();
 	    props.put("alias", "/hello");
 	    props.put("init.message", "PublisherServlet registered");
-
 	    
-	    PublisherServlet servlet = new PublisherServlet();
-	    inj.injectMembers(servlet);
+	    PublisherServlet servlet = inj.getInstance(PublisherServlet.class);
 	    
 	    registration = context.registerService(Servlet.class.getName(), servlet,props);
 	    

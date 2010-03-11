@@ -18,12 +18,18 @@ public class PublisherServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1577027590044679300L;
 
-	@Inject
+	
 	private Producer producer;
+	
+	@Inject	
+	public PublisherServlet(Producer producer){
+		this.producer = producer;
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		producer.send(new Message("PublisherServlet", "GET"));
 		
 		resp.getWriter().append("send message");
