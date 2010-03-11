@@ -6,5 +6,5 @@ dependencies {
 
 configure(jar.osgi) {
   instruction 'Import-Package', '*'
-  instruction 'Bundle-Activator', 'de.guderlei.pubsub.subscriber.Module'
+  instruction 'Bundle-Module', 'de.guderlei.pubsub.subscriber.Module'
 }
