@@ -1,5 +1,7 @@
 package de.guderlei.pubsub.hub;
 
+import org.osgi.service.log.LogService;
+
 import com.google.inject.Inject;
 
 import de.guderlei.pubsub.model.Message;
@@ -7,17 +9,24 @@ import de.guderlei.pubsub.model.Producer;
 import de.guderlei.pubsub.model.Subscriber;
 
 public class MessageHub implements Producer{
-	@Inject
-	private Iterable<Subscriber> subscribers;
 	
+	private final Iterable<Subscriber> subscribers;
+	private final LogService log;
+	
+	@Inject
+	public MessageHub(Iterable<Subscriber> subscribers, LogService log){
+		this.subscribers = subscribers;
+		this.log = log;
+	}
 
 	@Override
 	public void send(Message message) {
 		if(!subscribers.iterator().hasNext()){
-			System.out.println("no subscriber");
+			log.log(LogService.LOG_WARNING, "no subscriber");
 		}
-		
+				
 		for(Subscriber subscriber: subscribers){
+			log.log(LogService.LOG_INFO, "Distributing message ...");
 			subscriber.receive(message);
 		}		
 	} 
