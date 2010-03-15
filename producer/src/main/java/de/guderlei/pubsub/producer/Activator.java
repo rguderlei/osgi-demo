@@ -13,27 +13,34 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 
+/**Activator ofthe  PublisherServlet Bundle
+ * @author rguderlei
+ *
+ */
 public class Activator implements BundleActivator {
 
 	private ServiceRegistration registration;
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
-		/* Setup Guice */
+		// Setup Guice 
 	    Injector inj = Guice.createInjector(Peaberry.osgiModule(context), new ProducerModule());
-	    /* Create bundle content */
+	    // create Servlet instance via Guice
+	    PublisherServlet servlet = inj.getInstance(PublisherServlet.class);
 	    
+	    //Configure and register service
 	    Hashtable<String, String> props = new Hashtable<String, String>();
 	    props.put("alias", "/hello");
 	    props.put("init.message", "PublisherServlet registered");
-	    
-	    PublisherServlet servlet = inj.getInstance(PublisherServlet.class);
-	    
-	    registration = context.registerService(Servlet.class.getName(), servlet,props);
-	    
-	    	    
+	    registration = context.registerService(Servlet.class.getName(), servlet,props);    	    
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		registration.unregister();
