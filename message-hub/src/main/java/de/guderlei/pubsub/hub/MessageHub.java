@@ -8,17 +8,31 @@ import de.guderlei.pubsub.model.Message;
 import de.guderlei.pubsub.model.Producer;
 import de.guderlei.pubsub.model.Subscriber;
 
+/**
+ * The {@link MessageHub} takes a {@link Message} and distributes the message to
+ * a list of {@link Subscriber}s. 
+ * 
+ * @author rguderlei
+ *
+ */
 public class MessageHub implements Producer{
 	
 	private final Iterable<Subscriber> subscribers;
 	private final LogService log;
 	
+	/**Ctor.
+	 * @param subscribers
+	 * @param log
+	 */
 	@Inject
 	public MessageHub(Iterable<Subscriber> subscribers, LogService log){
 		this.subscribers = subscribers;
 		this.log = log;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void send(Message message) {
 		if(!subscribers.iterator().hasNext()){
