@@ -4,7 +4,6 @@ configure(jar.osgi) {
   version = '0.0.1'
   instruction 'Import-Package', '*'
   instruction 'Bundle-Activator', 'de.guderlei.pubsub.producer.Activator'
-  instruction 'Export-Package', 'de.guderlei.pubsub.producer.*'
 }
 
 dependencies {
