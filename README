@@ -2,3 +2,8 @@ simple and small OSGi demo
 - some bundles
 - declarative services
 - guice peaberry
+- integration tests (pax exam)
+- felix webconsole
+- instant run with gradle and pax runner
+
+Gradle 0.8 is required to build the demo.
