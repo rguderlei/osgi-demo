@@ -2,7 +2,7 @@ dependsOn(':model')
 
 configure(jar.osgi) {
   instruction 'Import-Package', '*'
-  instruction 'Bundle-Module', 'de.guderlei.pubsub.hub.activator.HubModule'
+  instruction 'Bundle-Module', 'de.guderlei.pubsub.hub.HubModule'
 }
 
 dependencies {
