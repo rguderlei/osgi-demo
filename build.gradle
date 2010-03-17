@@ -6,7 +6,7 @@ allprojects{
     	version = '0.0.1'
 
 	repositories {
-		flatDir name: 'localRepository', dirs: 'lib'							
+		flatDir name: 'localRepository', dirs: ['lib/compile', 'lib/runtime', 'lib/test']							
 	}
 }
 

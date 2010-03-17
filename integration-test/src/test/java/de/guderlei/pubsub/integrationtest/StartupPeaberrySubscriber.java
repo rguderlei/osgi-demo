@@ -37,12 +37,12 @@ public class StartupPeaberrySubscriber {
 				provision(
 				bundle(new File("./../model/build/libs/model-0.0.1.jar").toURI().toString()),
 				bundle(new File("./../subscribers/peaberry_subscriber/build/libs/peaberry_subscriber-0.0.1.jar").toURI().toString()),
-				bundle(new File("./../lib/jsr305-1.3.9.jar").toURI().toString()),
-				bundle(new File("./../lib/org.apache.felix.log-1.0.0.jar").toURI().toString()),
-				bundle(new File("./../lib/aopalliance-1.0.jar").toURI().toString()),
-				bundle(new File("./../lib/guice-2.0.jar").toURI().toString()),
-				bundle(new File("./../lib/peaberry-1.1.1.jar").toURI().toString()),
-				bundle(new File("./../lib/peaberry.activation-1.2-SNAPSHOT.jar").toURI().toString())
+				bundle(new File("./../lib/compile/jsr305-1.3.9.jar").toURI().toString()),
+				bundle(new File("./../lib/compile/org.apache.felix.log-1.0.0.jar").toURI().toString()),
+				bundle(new File("./../lib/runtime/aopalliance-1.0.jar").toURI().toString()),
+				bundle(new File("./../lib/compile/guice-2.0.jar").toURI().toString()),
+				bundle(new File("./../lib/compile/peaberry-1.1.1.jar").toURI().toString()),
+				bundle(new File("./../lib/runtime/peaberry.activation-1.2-SNAPSHOT.jar").toURI().toString())
 		));
 	}
 	

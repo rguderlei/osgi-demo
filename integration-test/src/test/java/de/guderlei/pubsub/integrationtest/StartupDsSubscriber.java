@@ -36,8 +36,8 @@ public class StartupDsSubscriber {
 				provision(
 				bundle(new File("./../model/build/libs/model-0.0.1.jar").toURI().toString()),
 				bundle(new File("./../subscribers/ds_subscriber/build/libs/ds_subscriber-0.0.1.jar").toURI().toString()),
-				bundle(new File("./../lib/jsr305-1.3.9.jar").toURI().toString()),
-				bundle(new File("./../lib/org.apache.felix.log-1.0.0.jar").toURI().toString())
+				bundle(new File("./../lib/compile/jsr305-1.3.9.jar").toURI().toString()),
+				bundle(new File("./../lib/compile/org.apache.felix.log-1.0.0.jar").toURI().toString())
 		));
 	}
 	
