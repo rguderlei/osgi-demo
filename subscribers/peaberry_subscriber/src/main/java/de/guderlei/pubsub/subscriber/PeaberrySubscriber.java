@@ -21,7 +21,7 @@ public class PeaberrySubscriber implements Subscriber {
 	 * @param logService
 	 */
 	@Inject
-	public PeaberrySubscriber(LogService logService){
+	PeaberrySubscriber(LogService logService){
 		this.logService = logService;
 	}
 	
