@@ -1,4 +1,4 @@
-package de.guderlei.pubsub.hub.activator;
+package de.guderlei.pubsub.hub;
 
 import org.osgi.service.log.LogService;
 

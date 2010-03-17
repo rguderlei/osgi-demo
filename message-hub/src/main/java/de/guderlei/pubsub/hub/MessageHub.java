@@ -25,7 +25,7 @@ public class MessageHub implements Producer{
 	 * @param log
 	 */
 	@Inject
-	public MessageHub(Iterable<Subscriber> subscribers, LogService log){
+	MessageHub(Iterable<Subscriber> subscribers, LogService log){
 		this.subscribers = subscribers;
 		this.log = log;
 	}
