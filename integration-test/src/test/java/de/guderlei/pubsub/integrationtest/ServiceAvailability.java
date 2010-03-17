@@ -12,6 +12,7 @@ import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -75,20 +76,25 @@ public class ServiceAvailability {
 	}
 	
 	@Test
-	public void peaberry_activation_is_started(){		
+	public void peaberry_activation_is_started() throws BundleException{		
 		for(Bundle bundle: bundleContext.getBundles()){
 			if(bundle.getSymbolicName().equals("org.ops4j.peaberry.activation")){
+				// equinox seems to start the bundle on demand ...
+				bundle.start();
 				assertEquals("peaberry bundle not active", Bundle.ACTIVE, bundle.getState());
 			}
 		}
 	}
 	
 	@Test
-	public void two_subscriber_services_are_available() throws InterruptedException{
+	public void two_subscriber_services_are_available() throws InterruptedException, BundleException{
+			//equinox seems to start some bundles on demand ...
+			for(Bundle bundle: bundleContext.getBundles()){
+				bundle.start();
+			}
+		
 			ServiceTracker tracker = new ServiceTracker(bundleContext, Subscriber.class.getName(),null);
 			tracker.open(true);
-			
-			tracker.waitForService(15000);
 			
 			ServiceReference[] subscribers = tracker.getServiceReferences();
 			assertNotNull("no subscribers found", subscribers);			

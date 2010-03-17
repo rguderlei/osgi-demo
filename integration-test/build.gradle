@@ -11,7 +11,9 @@ repositories {
 dependencies{
 	testCompile 'org.ops4j.pax.exam:pax-exam:1.2.0', 
 		    'org.ops4j.pax.exam:pax-exam-container-default:1.2.0',
-		    'org.ops4j.pax.exam:pax-exam-junit:1.2.0',		    
+		    'org.ops4j.pax.exam:pax-exam-junit:1.2.0',		
+		    'org.apache.felix:org.apache.felix.http.bundle:2.0.4@jar',
+		    ':pax-runner:1.4.0@jar',    
 		    project(':model'),
 		    project(':message-hub'),
 		    project(':subscribers:ds_subscriber'),
