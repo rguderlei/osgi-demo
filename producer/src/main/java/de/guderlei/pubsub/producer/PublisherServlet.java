@@ -27,7 +27,7 @@ public class PublisherServlet extends HttpServlet {
 	 * @param producer {@link Producer} to which the message will be passed
 	 */
 	@Inject	
-	public PublisherServlet(Producer producer){
+	PublisherServlet(Producer producer){
 		this.producer = producer;
 	}
 	
