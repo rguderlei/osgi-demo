@@ -73,6 +73,6 @@ task run(dependsOn:'dist') << {
 	ant.java(classname:'org.ops4j.pax.runner.Run', fork: true, classpath:"${configurations.paxrunner.asPath}"){
                 arg(value:'--args=file:etc/runner.properties')
                 arg(value:'--workingDirectory=build/runner')
-                arg(value:'build/distributions/pubsub-0.0.1.zip')
+                arg(value:'build/distributions/osgi-demo-0.0.1.zip')
         }
 }
