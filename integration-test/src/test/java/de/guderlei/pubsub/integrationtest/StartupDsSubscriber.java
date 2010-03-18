@@ -19,7 +19,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.osgi.framework.BundleContext;
-import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.framework.ServiceReference;
 
 import de.guderlei.pubsub.model.Subscriber;
 
@@ -46,13 +46,12 @@ public class StartupDsSubscriber {
 	 */
 	@Test
 	public void one_subscriber_is_registered()throws InterruptedException{
-		ServiceTracker tracker = new ServiceTracker(bundleContext, Subscriber.class.getName(), null);
-		tracker.open();
-		
-		Subscriber srvc = (Subscriber) tracker.waitForService(3000);
+		ServiceReference ref = bundleContext.getServiceReference(Subscriber.class.getName());
+		assertNotNull(ref);
+		Subscriber srvc = (Subscriber) bundleContext.getService(ref);
 		assertNotNull(srvc);
 		assertEquals("de.guderlei.pubsub.subscriber.SimpleSubscriber", srvc.getClass().getName());
-		tracker.close();
+		bundleContext.ungetService(ref);
 	}
 	
 }

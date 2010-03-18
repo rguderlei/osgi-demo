@@ -13,8 +13,8 @@ import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
-import org.osgi.util.tracker.ServiceTracker;
 
 
 import de.guderlei.pubsub.model.Producer;
@@ -87,30 +87,27 @@ public class ServiceAvailability {
 	}
 	
 	@Test
-	public void two_subscriber_services_are_available() throws InterruptedException, BundleException{
+	public void two_subscriber_services_are_available() throws BundleException, InvalidSyntaxException {
 			//equinox seems to start some bundles on demand ...
 			for(Bundle bundle: bundleContext.getBundles()){
 				bundle.start();
 			}
-		
-			ServiceTracker tracker = new ServiceTracker(bundleContext, Subscriber.class.getName(),null);
-			tracker.open(true);
 			
-			ServiceReference[] subscribers = tracker.getServiceReferences();
+			ServiceReference[] subscribers = bundleContext.getServiceReferences(Subscriber.class.getName(), null);
 			assertNotNull("no subscribers found", subscribers);			
-			assertEquals(2, subscribers.length);
-			
-			tracker.close();			
+			assertEquals(2, subscribers.length);		
 	}
 	
 	@Test
 	public void one_producer_service_is_available() throws InterruptedException{
-		ServiceTracker tracker = new ServiceTracker(bundleContext, Producer.class.getName(),null);
-		tracker.open();		
-		Producer prod = (Producer) tracker.waitForService(3000);
+		
+		ServiceReference ref = bundleContext.getServiceReference(Producer.class.getName());
+		assertNotNull(ref);
+		Producer prod = (Producer) bundleContext.getService(ref);		
 		assertNotNull(prod);		
 		assertEquals("de.guderlei.pubsub.hub.MessageHub", prod.getClass().getName());
-		tracker.close();
+		
+		bundleContext.ungetService(ref);
 	}
 	
 	/**
@@ -118,12 +115,12 @@ public class ServiceAvailability {
 	 */
 	@Test
 	public void one_servlet_is_registered()throws InterruptedException{
-		ServiceTracker tracker = new ServiceTracker(bundleContext, Servlet.class.getName(),null);
-		tracker.open();
-		
-		Servlet srvlt = (Servlet) tracker.waitForService(3000);
+		ServiceReference ref = bundleContext.getServiceReference(Servlet.class.getName());
+		assertNotNull(ref);
+		Servlet srvlt = (Servlet) bundleContext.getService(ref);
 		assertNotNull(srvlt);
 		assertEquals("PublisherServlet", srvlt.getClass().getSimpleName());			
-		tracker.close();
+		
+		bundleContext.ungetService(ref);
 	}
 }
