@@ -18,7 +18,9 @@ import org.ops4j.pax.exam.Inject;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.ServiceReference;
 
 import de.guderlei.pubsub.model.Subscriber;
@@ -48,9 +50,15 @@ public class StartupPeaberrySubscriber {
 	
 	/**
 	 * Checks whether one {@link Subscriber} is registered
+	 * @throws BundleException 
 	 */
 	@Test
-	public void one_subscriber_is_registered()throws InterruptedException{
+	public void one_subscriber_is_registered()throws InterruptedException, BundleException{
+		//equinox seems to start some bundles on demand ...
+		for(Bundle bundle: bundleContext.getBundles()){
+			bundle.start();
+		}
+		
 		ServiceReference ref = bundleContext.getServiceReference(Subscriber.class.getName());
 		assertNotNull(ref);
 		Subscriber srvc = (Subscriber) bundleContext.getService(ref);

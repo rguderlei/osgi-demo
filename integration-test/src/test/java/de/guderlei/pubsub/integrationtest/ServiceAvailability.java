@@ -99,7 +99,11 @@ public class ServiceAvailability {
 	}
 	
 	@Test
-	public void one_producer_service_is_available() throws InterruptedException{
+	public void one_producer_service_is_available() throws InterruptedException, BundleException{
+		//equinox seems to start some bundles on demand ...
+		for(Bundle bundle: bundleContext.getBundles()){
+			bundle.start();
+		}
 		
 		ServiceReference ref = bundleContext.getServiceReference(Producer.class.getName());
 		assertNotNull(ref);
@@ -112,9 +116,15 @@ public class ServiceAvailability {
 	
 	/**
 	 * Checks whether one {@link PublisherServlet} is registered
+	 * @throws BundleException 
 	 */
 	@Test
-	public void one_servlet_is_registered()throws InterruptedException{
+	public void one_servlet_is_registered()throws InterruptedException, BundleException{
+		//equinox seems to start some bundles on demand ...
+		for(Bundle bundle: bundleContext.getBundles()){
+			bundle.start();
+		}
+		
 		ServiceReference ref = bundleContext.getServiceReference(Servlet.class.getName());
 		assertNotNull(ref);
 		Servlet srvlt = (Servlet) bundleContext.getService(ref);
