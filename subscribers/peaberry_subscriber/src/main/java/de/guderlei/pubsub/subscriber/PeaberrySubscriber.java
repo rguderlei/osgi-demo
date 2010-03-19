@@ -15,7 +15,7 @@ import de.guderlei.pubsub.model.Subscriber;
  *
  */
 public class PeaberrySubscriber implements Subscriber {
-	private LogService logService;
+	private final LogService logService;
 	
 	/**Ctor.
 	 * @param logService
