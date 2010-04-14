@@ -14,9 +14,25 @@
 
   <groupId>de.guderlei.osgidemo</groupId>
   <artifactId>message-hub</artifactId>
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   <version>1.0.0</version>
   <name>the message hub component</name>
+
+  <build>
+    <plugins>
+      <plugin>   
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Module>de.guderlei.pubsub.hub.HubModule</Bundle-Module>
+	    <Export-Package></Export-Package>
+          </instructions>
+        </configuration>
+      </plugin> 
+    </plugins>
+  </build>
 
   <dependencies>
      <dependency>

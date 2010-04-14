@@ -14,9 +14,25 @@
 
   <groupId>de.guderlei.osgidemo</groupId>
   <artifactId>ds_subscriber</artifactId>
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   <version>1.0.0</version>
   <name>ds powered subscriber service</name>
+
+  <build>
+    <plugins>
+      <plugin>   
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Service-Component>OSGI-INF/simpleSubscriber.xml</Service-Component>
+	    <Export-Package></Export-Package>
+          </instructions>
+        </configuration>
+      </plugin> 
+    </plugins>
+  </build>
 
   <dependencies>
      <dependency>

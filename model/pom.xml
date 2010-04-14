@@ -14,9 +14,25 @@
 
   <groupId>de.guderlei.osgidemo</groupId>
   <artifactId>model</artifactId>
-  <packaging>jar</packaging>
+  <packaging>bundle</packaging>
   <version>1.0.0</version>
   <name>the model of the osgi demo</name>
+
+  <build>
+    <plugins>
+      <plugin>   
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>de.guderlei.pubsub.model.*</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin> 
+    </plugins>
+  </build>
+
 
   <dependencies>
     <dependency>
