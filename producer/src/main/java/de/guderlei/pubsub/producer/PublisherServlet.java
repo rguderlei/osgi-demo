@@ -1,6 +1,7 @@
 package de.guderlei.pubsub.producer;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,8 +41,9 @@ public class PublisherServlet extends HttpServlet {
 		
 		producer.send(new Message("PublisherServlet", "request from " + req.getRemoteHost()));
 		
-		resp.getWriter().append("send message");
-		resp.getWriter().close();
+		PrintWriter writer = resp.getWriter();
+		writer.append("send message");
+		writer.close();
 	}
 
 }

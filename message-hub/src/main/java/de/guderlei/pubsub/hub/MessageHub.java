@@ -33,8 +33,9 @@ public class MessageHub implements Producer{
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Override 
 	public void send(Message message) {
+		
 		if(!subscribers.iterator().hasNext()){
 			log.log(LogService.LOG_WARNING, "no subscriber");
 		}
