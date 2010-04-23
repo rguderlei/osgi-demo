@@ -6,4 +6,4 @@ simple and small OSGi demo
 - felix webconsole
 - instant run with gradle and pax runner
 
-Gradle 0.8 is required to build the demo.
+Gradle 0.8 or Maven is required to build the demo.
