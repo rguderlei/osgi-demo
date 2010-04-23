@@ -44,8 +44,6 @@ public class PublisherServlet extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		writer.append("send message");
 		writer.close();
-
-		Message msg = new Message(null, null);
 	}
 
 }
