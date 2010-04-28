@@ -13,39 +13,91 @@
 
 
   <groupId>de.guderlei.osgidemo</groupId>
-  <artifactId>model</artifactId>
-  <packaging>bundle</packaging>
+  <artifactId>integration-tests</artifactId>
+  <packaging>jar</packaging>
   <version>1.0.0</version>
-  <name>the model of the osgi demo</name>
+  <name>integration tests for the osgi demo</name>
+
+<properties>
+    <pax-exam-version>1.2.0</pax-exam-version>
+  </properties>
+
 
   <build>
     <plugins>
-      <plugin>   
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Export-Package>de.guderlei.pubsub.model.*</Export-Package>
-          </instructions>
-        </configuration>
-      </plugin> 
-    </plugins>
+    <plugin>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>maven-paxexam-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-config</id>
+            <goals>
+              <goal>generate-config</goal>
+            </goals>
+          </execution>
+        </executions>
+  </plugin>
+  </plugins>
   </build>
-
-
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+  <dependency>
+      <groupId>de.guderlei.osgidemo</groupId>
+      <artifactId>model</artifactId>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
+      <groupId>de.guderlei.osgidemo</groupId>
+      <artifactId>message-hub</artifactId>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
-       <groupId>net.sourceforge.findbugs</groupId>
-       <artifactId>jsr305</artifactId>
+      <groupId>de.guderlei.osgidemo</groupId>
+      <artifactId>producer</artifactId>
+      <version>1.0.0</version>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>de.guderlei.osgidemo</groupId>
+      <artifactId>ds_subscriber</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+      <dependency>
+      <groupId>de.guderlei.osgidemo</groupId>
+      <artifactId>peaberry_subscriber</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  <dependency>
+    <groupId>org.apache.felix</groupId>
+    <artifactId>org.apache.felix.http.bundle</artifactId>
+    <version>2.0.4</version>
+    <scope>provided</scope>
+   </dependency>
+ 
+   <!-- Pax-Exam dependencies -->
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam</artifactId>
+        <version>${pax-exam-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-junit</artifactId>
+        <version>${pax-exam-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-container-default</artifactId>
+        <version>${pax-exam-version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.ops4j.pax.exam</groupId>
+        <artifactId>pax-exam-junit-extender-impl</artifactId>
+        <version>${pax-exam-version}</version>
+      </dependency>
+
+      <!-- JUnit dependencies -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+      </dependency>
+        </dependencies>
 </project>
