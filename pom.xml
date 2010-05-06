@@ -16,6 +16,7 @@
     <module>producer</module>
     <module>subscribers/ds_subscriber</module>
     <module>subscribers/peaberry_subscriber</module>
+    <module>integration-test</module>
   </modules>
 
   <build>

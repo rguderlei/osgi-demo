@@ -2,10 +2,7 @@ package de.guderlei.pubsub.integrationtest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.ops4j.pax.exam.CoreOptions.bundle;
-import static org.ops4j.pax.exam.CoreOptions.equinox;
-import static org.ops4j.pax.exam.CoreOptions.options;
-import static org.ops4j.pax.exam.CoreOptions.provision;
+import static org.ops4j.pax.exam.CoreOptions.*;
 import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.configProfile;
 import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.dsProfile;
 import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.rawPaxRunnerOption;
@@ -33,7 +30,7 @@ public class StartupPeaberrySubscriber {
 	
 	@Configuration
 	public Option[] configure() {
-		return options(equinox(), dsProfile(), configProfile(), 
+		return options(mavenConfiguration(),equinox(), dsProfile(), configProfile(), 
 				rawPaxRunnerOption("http.proxyHost", "proxy"),
 				rawPaxRunnerOption("http.proxyPort", "3128"),
 				provision(
