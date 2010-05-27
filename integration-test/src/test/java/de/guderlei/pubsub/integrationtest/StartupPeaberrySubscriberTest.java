@@ -24,7 +24,7 @@ import de.guderlei.pubsub.model.Subscriber;
 
 
 @RunWith(JUnit4TestRunner.class)
-public class StartupPeaberrySubscriber {
+public class StartupPeaberrySubscriberTest {
 	@Inject
 	BundleContext bundleContext;
 	
@@ -34,8 +34,8 @@ public class StartupPeaberrySubscriber {
 				rawPaxRunnerOption("http.proxyHost", "proxy"),
 				rawPaxRunnerOption("http.proxyPort", "3128"),
 				provision(
-				bundle(new File("./../model/build/libs/model-0.0.1.jar").toURI().toString()),
-				bundle(new File("./../subscribers/peaberry_subscriber/build/libs/peaberry_subscriber-0.0.1.jar").toURI().toString()),
+						mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "model" ).version( "1.0.0" ),
+						mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "peaberry_subscriber" ).version( "1.0.0" ),
 				bundle(new File("./../lib/compile/jsr305-1.3.9.jar").toURI().toString()),
 				bundle(new File("./../lib/compile/org.apache.felix.log-1.0.0.jar").toURI().toString()),
 				bundle(new File("./../lib/runtime/aopalliance-1.0.jar").toURI().toString()),
@@ -53,7 +53,11 @@ public class StartupPeaberrySubscriber {
 	public void one_subscriber_is_registered()throws InterruptedException, BundleException{
 		//equinox seems to start some bundles on demand ...
 		for(Bundle bundle: bundleContext.getBundles()){
-			bundle.start();
+			try{
+				bundle.start();
+			} catch (Exception e) {
+				System.out.println(bundle.getSymbolicName() + " could not be started");
+			}
 		}
 		
 		ServiceReference ref = bundleContext.getServiceReference(Subscriber.class.getName());

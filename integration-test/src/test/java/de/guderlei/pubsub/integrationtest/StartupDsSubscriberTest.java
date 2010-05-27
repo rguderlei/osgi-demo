@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import static org.ops4j.pax.exam.CoreOptions.bundle;
 import static org.ops4j.pax.exam.CoreOptions.equinox;
+import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.options;
 import static org.ops4j.pax.exam.CoreOptions.provision;
 import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.configProfile;
@@ -24,7 +25,7 @@ import org.osgi.framework.ServiceReference;
 import de.guderlei.pubsub.model.Subscriber;
 
 @RunWith(JUnit4TestRunner.class)
-public class StartupDsSubscriber {
+public class StartupDsSubscriberTest {
 	@Inject
 	BundleContext bundleContext;
 	
@@ -34,8 +35,8 @@ public class StartupDsSubscriber {
 				rawPaxRunnerOption("http.proxyHost", "proxy"),
 				rawPaxRunnerOption("http.proxyPort", "3128"),
 				provision(
-				bundle(new File("./../model/build/libs/model-0.0.1.jar").toURI().toString()),
-				bundle(new File("./../subscribers/ds_subscriber/build/libs/ds_subscriber-0.0.1.jar").toURI().toString()),
+				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "model" ).version( "1.0.0" ),
+				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "ds_subscriber" ).version( "1.0.0" ),
 				bundle(new File("./../lib/compile/jsr305-1.3.9.jar").toURI().toString()),
 				bundle(new File("./../lib/compile/org.apache.felix.log-1.0.0.jar").toURI().toString())
 		));
