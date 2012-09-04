@@ -2,20 +2,13 @@ package de.guderlei.pubsub.integrationtest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.ops4j.pax.exam.CoreOptions.*;
 
-import static org.ops4j.pax.exam.CoreOptions.bundle;
-import static org.ops4j.pax.exam.CoreOptions.equinox;
-import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.options;
-import static org.ops4j.pax.exam.CoreOptions.provision;
-import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.configProfile;
-import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.dsProfile;
-import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.rawPaxRunnerOption;
 
 import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Inject;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
@@ -24,6 +17,8 @@ import org.osgi.framework.ServiceReference;
 
 import de.guderlei.pubsub.model.Subscriber;
 
+import javax.inject.Inject;
+
 @RunWith(JUnit4TestRunner.class)
 public class StartupDsSubscriberTest {
 	@Inject
@@ -31,15 +26,16 @@ public class StartupDsSubscriberTest {
 	
 	@Configuration
 	public Option[] configure() {
-		return options(equinox(), dsProfile(), configProfile(), 
+		return options(dsProfile(), configProfile(),
 				rawPaxRunnerOption("http.proxyHost", "proxy"),
 				rawPaxRunnerOption("http.proxyPort", "3128"),
-				provision(
-				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "model" ).version( "1.0.0" ),
-				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "ds_subscriber" ).version( "1.0.0" ),
-				bundle(new File("./../lib/compile/jsr305-1.3.9.jar").toURI().toString()),
-				bundle(new File("./../lib/compile/org.apache.felix.log-1.0.0.jar").toURI().toString())
-		));
+                provision(
+                mavenBundle().groupId("org.apache.felix").artifactId("org.apache.felix.log").version("1.0.1").start(),
+                mavenBundle( "org.apache.felix", "org.apache.felix.scr", "1.6.0" ).start(),
+				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "model" ).version( "1.0.0" ).start(),
+				mavenBundle().groupId( "de.guderlei.osgidemo" ).artifactId( "ds_subscriber" ).version( "1.0.0" ).start()
+
+		), junitBundles());
 	}
 	
 	/**

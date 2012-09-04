@@ -29,7 +29,7 @@ public class Activator implements BundleActivator {
 		// Setup Guice 
 	    Injector inj = Guice.createInjector(Peaberry.osgiModule(context), new ProducerModule());
 	    // create Servlet instance via Guice
-	    PublisherServlet servlet = inj.getInstance(PublisherServlet.class);
+	    Servlet servlet = inj.getInstance(Servlet.class);
 	    
 	    //Configure and register service
 	    Hashtable<String, String> props = new Hashtable<String, String>();

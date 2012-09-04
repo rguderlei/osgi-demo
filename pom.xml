@@ -1,79 +1,124 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.guderlei.osgidemo</groupId>
-  <artifactId>demo-parent</artifactId>
-  <packaging>pom</packaging>
-  <version>1.0.0</version>
-  <name>Parent Project of the osgi demo</name>
- 
-  <modules>
-    <module>model</module>
-    <module>message-hub</module>
-    <module>producer</module>
-    <module>subscribers/ds_subscriber</module>
-    <module>subscribers/peaberry_subscriber</module>
-    <module>integration-test</module>
-  </modules>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>1.6</source>
-            <target>1.6</target>
-          </configuration>
-        </plugin>
-      </plugins>
-   </pluginManagement> 
-  </build>
-
-<dependencyManagement>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>1.8.4</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-    <groupId>com.google.inject</groupId>
-    <artifactId>guice</artifactId>
-    <version>2.0</version>
-    <scope>provided</scope>
-</dependency>
-    <dependency>
-    <groupId>org.ops4j</groupId>
-    <artifactId>peaberry</artifactId>
-    <version>1.1.1</version>
-    <scope>provided</scope>
-	</dependency>
-    <dependency>
-    <groupId>net.sourceforge.findbugs</groupId>
-    <artifactId>jsr305</artifactId>
-    <version>1.3.2</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.felix</groupId>
-    <artifactId>org.apache.felix.log</artifactId>
+    <groupId>de.guderlei.osgidemo</groupId>
+    <artifactId>demo-parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0.0</version>
-    <scope>provided</scope>
-</dependency>
+    <name>Parent Project of the osgi demo</name>
 
-  </dependencies>
-  </dependencyManagement>
+    <modules>
+        <module>model</module>
+        <module>message-hub</module>
+        <module>producer</module>
+        <module>subscribers/ds_subscriber</module>
+        <module>subscribers/peaberry_subscriber</module>
+        <module>integration-test</module>
+    </modules>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.9</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.9.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.inject</groupId>
+                <artifactId>guice</artifactId>
+                <version>3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j</groupId>
+                <artifactId>peaberry</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+            	<groupId>org.ops4j.peaberry.extensions</groupId>
+            	<artifactId>peaberry.activation</artifactId>
+            	<version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.log</artifactId>
+                <version>1.0.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.osgi</groupId>
+                        <artifactId>org.osgi.core</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.osgi</groupId>
+                        <artifactId>org.osgi.compendium</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>de.guderlei.osgidemo</groupId>
+                <artifactId>model</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.guderlei.osgidemo</groupId>
+                <artifactId>ds_subscriber</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>de.guderlei.osgidemo</groupId>
+                <artifactId>peaberry_subscriber</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>de.guderlei.osgidemo</groupId>
+                <artifactId>message-hub</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>de.guderlei.osgidemo</groupId>
+                <artifactId>producer</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 </project>
 

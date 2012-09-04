@@ -1,5 +1,0 @@
-configure(jar.osgi) {
-  version = '0.0.1'
-  instruction 'Import-Package', '!de.guderlei.pubsub.model.*, *'
-  instruction 'Export-Package', 'de.guderlei.pubsub.model.*'
-}

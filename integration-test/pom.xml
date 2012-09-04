@@ -1,103 +1,151 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	 <parent>
-		<groupId>de.guderlei.osgidemo</groupId>
-		<artifactId>demo-parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath>.../pom.xml</relativePath>
-	</parent>
-
-
-  <groupId>de.guderlei.osgidemo</groupId>
-  <artifactId>integration-tests</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0.0</version>
-  <name>integration tests for the osgi demo</name>
-
-<properties>
-    <pax-exam-version>1.2.0</pax-exam-version>
-  </properties>
+    <parent>
+        <groupId>de.guderlei.osgidemo</groupId>
+        <artifactId>demo-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
 
 
-  <build>
-    <plugins>
-     <plugin>
-        <groupId>org.ops4j.pax.exam</groupId>
-        <artifactId>maven-paxexam-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>generate-config</id>
-            <goals>
-              <goal>generate-config</goal>
-            </goals>
-          </execution>
-        </executions>
-  </plugin> 
-  </plugins>
-  </build>
-  <dependencies>
-  <dependency>
-      <groupId>de.guderlei.osgidemo</groupId>
-      <artifactId>model</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>de.guderlei.osgidemo</groupId>
-      <artifactId>message-hub</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>de.guderlei.osgidemo</groupId>
-      <artifactId>producer</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>de.guderlei.osgidemo</groupId>
-      <artifactId>ds_subscriber</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-      <dependency>
-      <groupId>de.guderlei.osgidemo</groupId>
-      <artifactId>peaberry_subscriber</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-  <dependency>
-    <groupId>org.apache.felix</groupId>
-    <artifactId>org.apache.felix.http.bundle</artifactId>
-    <version>2.0.4</version>
-    <scope>provided</scope>
-   </dependency>
- 
-   <!-- Pax-Exam dependencies -->
-      <dependency>
-        <groupId>org.ops4j.pax.exam</groupId>
-        <artifactId>pax-exam</artifactId>
-        <version>${pax-exam-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ops4j.pax.exam</groupId>
-        <artifactId>pax-exam-junit</artifactId>
-        <version>${pax-exam-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ops4j.pax.exam</groupId>
-        <artifactId>pax-exam-container-default</artifactId>
-        <version>${pax-exam-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ops4j.pax.exam</groupId>
-        <artifactId>pax-exam-junit-extender-impl</artifactId>
-        <version>${pax-exam-version}</version>
-      </dependency>
+    <groupId>de.guderlei.osgidemo</groupId>
+    <artifactId>integration-tests</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+    <name>integration tests for the osgi demo</name>
 
-      <!-- JUnit dependencies -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-      </dependency>
-        </dependencies>
+    <properties>
+        <exam.version>2.5.0</exam.version>
+        <url.version>1.4.0</url.version>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>maven-paxexam-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-config</id>
+                        <goals>
+                            <goal>generate-config</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>de.guderlei.osgidemo</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.guderlei.osgidemo</groupId>
+            <artifactId>message-hub</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.guderlei.osgidemo</groupId>
+            <artifactId>producer</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.guderlei.osgidemo</groupId>
+            <artifactId>ds_subscriber</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.guderlei.osgidemo</groupId>
+            <artifactId>peaberry_subscriber</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-container-native</artifactId>
+            <version>${exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+                    <groupId>org.ops4j.pax.exam</groupId>
+                    <artifactId>pax-exam-container-native</artifactId>
+                    <version>${exam.version}</version>
+                    <scope>test</scope>
+                </dependency>
+
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-junit4</artifactId>
+            <version>${exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-link-mvn</artifactId>
+            <version>${exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ops4j.pax.url</groupId>
+            <artifactId>pax-url-aether</artifactId>
+            <version>${url.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <version>3.2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>0.9.20</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.20</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 </project>

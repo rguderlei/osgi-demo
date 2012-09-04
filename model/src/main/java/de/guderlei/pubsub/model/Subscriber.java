@@ -1,6 +1,6 @@
 package de.guderlei.pubsub.model;
 
-import javax.annotation.Nonnull;
+
 
 /**Interface describing a subscriber service.
  * 
@@ -13,5 +13,5 @@ public interface Subscriber {
 	/**function called by a message hub when the hub receives a message
 	 * @param message to be received by the subscriber, must not be null
 	 */
-	public void receive(@Nonnull Message message);
+	public void receive( Message message);
 }

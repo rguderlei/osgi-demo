@@ -5,3 +5,11 @@ target
 .classpath
 .classpath.old
 .project
+.idea
+demo-parent.iml
+producer/producer.iml
+integration-test/integration-tests.iml
+message-hub/message-hub.iml
+model/model.iml
+subscribers/peaberry_subscriber/peaberry_subscriber.iml
+subscribers/ds_subscriber/ds_subscriber.iml

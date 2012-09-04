@@ -1,6 +1,5 @@
 package de.guderlei.pubsub.model;
 
-import javax.annotation.Nonnull;
 
 /**The class representing a message to be processed by the system.
  * 
@@ -18,7 +17,7 @@ public class Message {
 	 * @param producer identifier for the producer of the message, must not be null
 	 * @param message the message, must not be null
 	 */
-	public Message (@Nonnull String producer, @Nonnull String message){
+	public Message (String producer, String message){
 		if(producer == null || "".equals(producer)){
 			throw new IllegalArgumentException("producer must not be null or empty");
 		}
@@ -31,7 +30,7 @@ public class Message {
 		this.message = message;
 	}
 	
-	public @Nonnull String toString(){
+	public String toString(){
 		return producer + ": " + message;
 	}
 	
