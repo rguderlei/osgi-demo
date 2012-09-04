@@ -1,5 +1,10 @@
 package de.guderlei.pubsub.subscriber;
 
+
+import aQute.bnd.annotation.component.Component;
+import org.osgi.service.component.ComponentContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.log.LogService;
 
 import de.guderlei.pubsub.model.Message;
@@ -11,6 +16,7 @@ import de.guderlei.pubsub.model.Subscriber;
  * @author rguderlei
  *
  */
+@Component(servicefactory = true)
 public class SimpleSubscriber implements Subscriber {
 	
 	private LogService log;
@@ -18,11 +24,17 @@ public class SimpleSubscriber implements Subscriber {
 	/**sets the log service reference
 	 * @param log
 	 */
+    @Reference
 	public void setLog(LogService log){
 		if(log != null){
 			this.log = log;
 		}
 	}
+
+    @Activate
+    protected void activate(ComponentContext context) {
+
+    }
 
 	/**
 	 * {@inheritDoc}

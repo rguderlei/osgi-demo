@@ -1,11 +1,9 @@
 package de.guderlei.pubsub.integrationtest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.*;
-
-
-import java.io.File;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,5 +48,28 @@ public class StartupDsSubscriberTest {
 		assertEquals("de.guderlei.pubsub.subscriber.SimpleSubscriber", srvc.getClass().getName());
 		bundleContext.ungetService(ref);
 	}
+
+    /**
+     * Checks whether one {@link Subscriber} is registered
+     */
+    @Test
+    public void requesting_services_leads_to_different_objects()throws InterruptedException{
+        ServiceReference ref = bundleContext.getServiceReference(Subscriber.class.getName());
+        assertNotNull(ref);
+        Subscriber srvc1 = (Subscriber) bundleContext.getService(ref);
+
+        ServiceReference ref2 = bundleContext.getServiceReference(Subscriber.class.getName());
+        assertNotNull(ref2);
+
+        Subscriber srvc2 = (Subscriber) bundleContext.getService(ref2);
+
+        assertFalse(srvc1 == srvc2);
+
+        bundleContext.ungetService(ref);
+        bundleContext.ungetService(ref2);
+
+    }
+
+
 	
 }
