@@ -93,26 +93,25 @@ public class StartupDsSubscriberTest {
      * Checks whether one {@link Subscriber} is registered
      */
     @Test
-    @Ignore
     public void requesting_services_with_different_configurations_leads_to_different_objects() throws InterruptedException, IOException {
-        org.osgi.service.cm.Configuration config = configurationAdmin.createFactoryConfiguration("simple_subscriber");
-               Properties props = new Properties();
-               props.put("ds.subscriber.prefix", "foo");
-               config.update(props);
+        org.osgi.service.cm.Configuration config =  configurationAdmin.createFactoryConfiguration("simple_subscriber", null);
+        Properties props = new Properties();
+        props.put("prefix", "foo");
+        config.update(props);
 
-        ServiceReference ref = bundleContext.getServiceReference(Subscriber.class.getName());
-        assertNotNull(ref);
-        Subscriber srvc1 = (Subscriber) bundleContext.getService(ref);
+        config =  configurationAdmin.createFactoryConfiguration("simple_subscriber", null);
+        props = new Properties();
+        props.put("prefix", "bar");
+        config.update(props);
 
+        ServiceTracker serviceTracker = new ServiceTracker(bundleContext, Subscriber.class.getName(), null);
+        serviceTracker.open();
 
-
-        Subscriber srvc2 = (Subscriber) bundleContext.getService(ref);
-
-        assertFalse(srvc1 == srvc2);
-
-        bundleContext.ungetService(ref);
-
-
+        Object[] services = serviceTracker.getServices();
+        assertEquals(services.length, 2);
+        assertNotNull(services[0]);
+        assertNotNull(services[1]);
+        assertFalse(services[0] == services[1]);
     }
 
 
