@@ -3,6 +3,9 @@ simple and small OSGi demo
 - declarative services
 - guice peaberry
 - integration tests (pax exam)
-- felix webconsole
+- Configuration of declarative services with ConfigAdmin/MetaType
 
 Maven 3 is required to build the demo.
+
+There is also a Pax Runner config:
+pax-run --args=file:etc/runner.properties

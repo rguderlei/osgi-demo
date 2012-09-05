@@ -5,6 +5,7 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.servlet.Servlet;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Option;
@@ -12,6 +13,8 @@ import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.ExamReactorStrategy;
 import org.ops4j.pax.exam.junit.JUnit4TestRunner;
 import org.ops4j.pax.exam.spi.reactors.AllConfinedStagedReactorFactory;
+import org.ops4j.pax.exam.spi.reactors.EagerSingleStagedReactor;
+import org.ops4j.pax.exam.spi.reactors.EagerSingleStagedReactorFactory;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -36,11 +39,10 @@ public class ServiceAvailabilityTest {
 
     @Configuration
     public Option[] configure() {
-        return options( dsProfile(), configProfile(),
-                rawPaxRunnerOption("http.proxyHost", "proxy"),
-                rawPaxRunnerOption("http.proxyPort", "3128"),
-                systemPackages("javax.inject", "org.aopalliance.intercept; version=\"1.0\"", "org.aopalliance.aop; version=\"1.0\""),
+        return options(
+                systemPackages("org.aopalliance.intercept; version=\"1.0\"", "org.aopalliance.aop; version=\"1.0\""),
                 provision(
+                        mavenBundle().groupId("biz.aQute").artifactId("bndlib").version("1.43.0").start(),
                         mavenBundle().groupId("com.google.inject").artifactId("guice").version("3.0").start(),
                         mavenBundle().groupId("org.ops4j").artifactId("peaberry").version("1.2").start(),
                         mavenBundle().groupId("org.ops4j.peaberry.extensions").artifactId("peaberry.activation").version("1.2").start(),
@@ -55,6 +57,16 @@ public class ServiceAvailabilityTest {
                         //bundle(new File("./../lib/runtime/aopalliance-1.0.jar").toURI().toString())
                 ), junitBundles());
     }
+
+    @Before
+   public void before() throws BundleException{
+        if(bundleContext != null){
+            for(Bundle bundle: bundleContext.getBundles()){
+                   bundle.start();
+                   System.out.println("Bundle " + bundle.getSymbolicName() + " started");
+            }
+        }
+   }
 
     @Test
     public void bundle_context_available() {

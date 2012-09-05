@@ -26,8 +26,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Service-Component>de.guderlei.pubsub.subscriber.SimpleSubscriber</Service-Component>
+                        <Service-Component>de.guderlei.pubsub.subscriber.*</Service-Component>
                         <Export-Package></Export-Package>
+                        <Bundle-Name>ds_subscriber_bundle</Bundle-Name>
                     </instructions>
                 </configuration>
             </plugin>
