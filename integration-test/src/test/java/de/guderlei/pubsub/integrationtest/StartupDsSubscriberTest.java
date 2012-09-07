@@ -114,6 +114,28 @@ public class StartupDsSubscriberTest {
         assertFalse(services[0] == services[1]);
     }
 
+    @Test
+    public void testLocateServiceByConfigurationValue() throws InterruptedException, IOException, InvalidSyntaxException {
+        org.osgi.service.cm.Configuration config =  configurationAdmin.createFactoryConfiguration("simple_subscriber", null);
+        Properties props = new Properties();
+        props.put("prefix", "foo");
+        config.update(props);
+
+        config =  configurationAdmin.createFactoryConfiguration("simple_subscriber", null);
+        props = new Properties();
+        props.put("prefix", "bar");
+        config.update(props);
+
+        Filter filter = FrameworkUtil.createFilter("(prefix=foo)");
+        ServiceTracker serviceTracker = new ServiceTracker(bundleContext, filter, null);
+        serviceTracker.open();
+
+        Object[] services = serviceTracker.getServices();
+        assertEquals(services.length, 1);
+        assertNotNull(services[0]);
+        assertTrue(services[0] instanceof Subscriber);
+    }
+
 
 
 }
